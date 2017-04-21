@@ -1,0 +1,34 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "eventHubMessage",
+      "direction": "in",
+      "path": "notacommands",
+      "connection": "<connection_to_eventhub>"
+    },
+    {
+      "type": "table",
+      "name": "events",
+      "tableName": "events",
+      "take": 50,
+      "connection": "<connection_to_storage>",
+      "direction": "in"
+    },
+    {
+      "type": "table",
+      "name": "outEvents",
+      "tableName": "events",
+      "connection": "<connection_to_storage>",
+      "direction": "out"
+    },
+    {
+      "type": "queue",
+      "name": "outputQueueItem",
+      "queueName": "eventcreated",
+      "connection": "<connection_to_storage>",
+      "direction": "out"
+    }
+  ],
+  "disabled": true
+}

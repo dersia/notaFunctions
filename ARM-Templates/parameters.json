@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccounts_dddnota_name": {
+            "value": null
+        },
+        "databaseAccounts_dddnota_name_1": {
+            "value": null
+        },
+        "namespaces_dddnote_name": {
+            "value": null
+        },
+        "namespaces_dddnota_name": {
+            "value": null
+        },
+        "storageAccounts_dddnotastor_name": {
+            "value": null
+        },
+        "serverfarms_CanadaCentralPlan_name": {
+            "value": null
+        },
+        "sites_dddnota_aggregator_name": {
+            "value": null
+        },
+        "sites_dddnota_name": {
+            "value": null
+        },
+        "AuthorizationRules_RootManageSharedAccessKey_name": {
+            "value": null
+        },
+        "eventhubs_notacommands_name": {
+            "value": null
+        },
+        "eventhubs_notaevents_name": {
+            "value": null
+        },
+        "authorizationRules_notacommandskey_name": {
+            "value": null
+        },
+        "consumergroups_$Default_name": {
+            "value": null
+        },
+        "authorizationRules_dddnota_access_name": {
+            "value": null
+        },
+        "consumergroups_$Default_name_1": {
+            "value": null
+        },
+        "notificationHubs_notamobilenotifications_name": {
+            "value": null
+        }
+    }
+}

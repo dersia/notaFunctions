@@ -1,0 +1,35 @@
+{
+  "bindings": [
+    {
+      "name": "myQueueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "eventcreated",
+      "connection": "<connection_to_storage>"
+    },
+    {
+      "type": "documentDB",
+      "name": "outputProjections",
+      "databaseName": "dddnota",
+      "collectionName": "projections",
+      "createIfNotExists": true,
+      "connection": "<connection_to_documentdb>",
+      "direction": "out"
+    },
+    {
+      "type": "queue",
+      "name": "outputNotify",
+      "queueName": "notanotify",
+      "connection": "<connection_to_storage>",
+      "direction": "out"
+    },
+    {
+      "type": "table",
+      "name": "events",
+      "tableName": "events",
+      "connection": "<connection_to_storage>",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

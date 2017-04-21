@@ -1,0 +1,32 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "CreateReferendum"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "eventHub",
+      "name": "outputEvents",
+      "path": "notacommands",
+      "connection": "<connection_to_eventhub>",
+      "direction": "out"
+    },
+    {
+      "type": "table",
+      "name": "events",
+      "tableName": "events",
+      "take": "50",
+      "connection": "<connection_to_storage>",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

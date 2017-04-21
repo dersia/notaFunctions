@@ -1,0 +1,372 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccounts_dddnota_name": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "databaseAccounts_dddnota_name_1": {
+            "defaultValue": "dddnota",
+            "type": "String"
+        },
+        "namespaces_dddnote_name": {
+            "defaultValue": "dddnote",
+            "type": "String"
+        },
+        "namespaces_dddnota_name": {
+            "defaultValue": "dddnota",
+            "type": "String"
+        },
+        "storageAccounts_dddnotastor_name": {
+            "defaultValue": "dddnotastor",
+            "type": "String"
+        },
+        "serverfarms_CanadaCentralPlan_name": {
+            "defaultValue": "CanadaCentralPlan",
+            "type": "String"
+        },
+        "sites_dddnota_aggregator_name": {
+            "defaultValue": "dddnota-aggregator",
+            "type": "String"
+        },
+        "sites_dddnota_name": {
+            "defaultValue": "dddnota",
+            "type": "String"
+        },
+        "AuthorizationRules_RootManageSharedAccessKey_name": {
+            "defaultValue": "dddnote/RootManageSharedAccessKey",
+            "type": "String"
+        },
+        "eventhubs_notacommands_name": {
+            "defaultValue": "dddnote/notacommands",
+            "type": "String"
+        },
+        "eventhubs_notaevents_name": {
+            "defaultValue": "dddnote/notaevents",
+            "type": "String"
+        },
+        "authorizationRules_notacommandskey_name": {
+            "defaultValue": "dddnote/notacommands/notacommandskey",
+            "type": "String"
+        },
+        "consumergroups_$Default_name": {
+            "defaultValue": "dddnote/notacommands/$Default",
+            "type": "String"
+        },
+        "authorizationRules_dddnota_access_name": {
+            "defaultValue": "dddnote/notaevents/dddnota_access",
+            "type": "String"
+        },
+        "consumergroups_$Default_name_1": {
+            "defaultValue": "dddnote/notaevents/$Default",
+            "type": "String"
+        },
+        "notificationHubs_notamobilenotifications_name": {
+            "defaultValue": "dddnota/notamobilenotifications",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourceGroups/nota/providers/Microsoft.DocumentDB/databaseAccounts/dddnota'.",
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "GlobalDocumentDB",
+            "name": "[parameters('databaseAccounts_dddnota_name_1')]",
+            "apiVersion": "2015-04-08",
+            "location": "Canada Central",
+            "tags": {},
+            "properties": {
+                "databaseAccountOfferType": "Standard",
+                "consistencyPolicy": {
+                    "defaultConsistencyLevel": "Session",
+                    "maxIntervalInSeconds": 5,
+                    "maxStalenessPrefix": 100
+                },
+                "name": "[parameters('databaseAccounts_dddnota_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote'.",
+            "type": "Microsoft.EventHub/namespaces",
+            "sku": {
+                "name": "Standard",
+                "tier": "Standard"
+            },
+            "kind": "EventHub",
+            "name": "[parameters('namespaces_dddnote_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "tags": {},
+            "properties": {
+                "provisioningState": "Succeeded",
+                "status": "Active",
+                "createdAt": "2017-04-19T08:37:22.28Z",
+                "serviceBusEndpoint": "[concat('https://', parameters('namespaces_dddnote_name'),'.servicebus.windows.net:443/')]",
+                "enabled": true,
+                "updatedAt": "2017-04-19T08:37:45.717Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.NotificationHubs/namespaces/dddnota'.",
+            "type": "Microsoft.NotificationHubs/namespaces",
+            "sku": {
+                "name": "Free"
+            },
+            "kind": "NotificationHub",
+            "name": "[parameters('namespaces_dddnota_name')]",
+            "apiVersion": "2014-09-01",
+            "location": "Canada Central",
+            "tags": {},
+            "properties": {
+                "namespaceType": "NotificationHub"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourceGroups/nota/providers/Microsoft.Storage/storageAccounts/dddnotastor'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[parameters('storageAccounts_dddnotastor_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "canadacentral",
+            "tags": {},
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourceGroups/nota/providers/Microsoft.Web/serverfarms/CanadaCentralPlan'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+            "name": "[parameters('serverfarms_CanadaCentralPlan_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "name": "[parameters('serverfarms_CanadaCentralPlan_name')]",
+                "numberOfWorkers": 0
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourceGroups/nota/providers/Microsoft.Web/sites/dddnota-aggregator'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[parameters('sites_dddnota_aggregator_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "name": "[parameters('sites_dddnota_aggregator_name')]",
+                "hostNames": [
+                    "dddnota-aggregator.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "dddnota-aggregator.azurewebsites.net",
+                    "dddnota-aggregator.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_dddnota_aggregator_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_dddnota_aggregator_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CanadaCentralPlan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CanadaCentralPlan_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourceGroups/nota/providers/Microsoft.Web/sites/dddnota'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[parameters('sites_dddnota_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "name": "[parameters('sites_dddnota_name')]",
+                "hostNames": [
+                    "dddnota.azurewebsites.net"
+                ],
+                "enabledHostNames": [
+                    "dddnota.azurewebsites.net",
+                    "dddnota.scm.azurewebsites.net"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_dddnota_name'),'.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(parameters('sites_dddnota_name'),'.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CanadaCentralPlan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CanadaCentralPlan_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/AuthorizationRules/RootManageSharedAccessKey'.",
+            "type": "Microsoft.EventHub/namespaces/AuthorizationRules",
+            "name": "[parameters('AuthorizationRules_RootManageSharedAccessKey_name')]",
+            "apiVersion": "2015-08-01",
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notacommands'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs",
+            "name": "[parameters('eventhubs_notacommands_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "messageRetentionInDays": 7,
+                "status": "Active",
+                "createdAt": "2017-04-20T06:11:48.743",
+                "updatedAt": "2017-04-20T06:12:21.58",
+                "partitionCount": 2,
+                "partitionIds": [
+                    "0",
+                    "1"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notaevents'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs",
+            "name": "[parameters('eventhubs_notaevents_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "messageRetentionInDays": 1,
+                "status": "Active",
+                "createdAt": "2017-04-19T09:33:30.187",
+                "updatedAt": "2017-04-19T09:35:00.53",
+                "partitionCount": 2,
+                "partitionIds": [
+                    "0",
+                    "1"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notacommands/authorizationRules/notacommandskey'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
+            "name": "[parameters('authorizationRules_notacommandskey_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "rights": [
+                    "Send",
+                    "Listen"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubs_notacommands_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notacommands/consumergroups/$Default'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+            "name": "[parameters('consumergroups_$Default_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "createdAt": "2017-04-20T06:11:46.8735576",
+                "updatedAt": "2017-04-20T06:11:46.8735576"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubs_notacommands_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notaevents/authorizationRules/dddnota_access'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
+            "name": "[parameters('authorizationRules_dddnota_access_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "rights": [
+                    "Send",
+                    "Listen"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubs_notaevents_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.EventHub/namespaces/dddnote/eventhubs/notaevents/consumergroups/$Default'.",
+            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+            "name": "[parameters('consumergroups_$Default_name_1')]",
+            "apiVersion": "2015-08-01",
+            "location": "Canada Central",
+            "properties": {
+                "createdAt": "2017-04-19T09:33:31.1001721",
+                "updatedAt": "2017-04-19T09:33:31.2586255"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_dddnote_name'))]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubs_notaevents_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/84952683-ac04-458d-b5d4-0ac5c0baf331/resourcegroups/nota/providers/Microsoft.NotificationHubs/namespaces/dddnota/notificationHubs/notamobilenotifications'.",
+            "type": "Microsoft.NotificationHubs/namespaces/notificationHubs",
+            "name": "[parameters('notificationHubs_notamobilenotifications_name')]",
+            "apiVersion": "2014-09-01",
+            "location": "Canada Central",
+            "properties": {
+                "authorizationRules": []
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.NotificationHubs/namespaces', parameters('namespaces_dddnota_name'))]"
+            ]
+        }
+    ]
+}
